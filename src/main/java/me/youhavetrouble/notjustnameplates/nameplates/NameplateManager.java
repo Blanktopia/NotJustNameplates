@@ -91,6 +91,35 @@ public class NameplateManager implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onPlayerSneak(PlayerToggleSneakEvent event) {
+        Player player = event.getPlayer();
+
+        Nameplate nameplate = nameplates.get(event.getPlayer().getUniqueId());
+        if (nameplate == null) return;
+
+        TextDisplay textDisplay = nameplate.getEntity();
+        if (textDisplay == null) return;
+
+        DisplayContent displayContent = NotJustNameplates.getInstance().getDisplayContentForPlayerBasedOnPermission(event.getPlayer());
+        if (displayContent == null) return;
+
+        if (displayContent.getSeeThroughWhenSneaking()) {
+            textDisplay.setSeeThrough(!event.isSneaking());
+        }
+
+        if (displayContent.getTranslucentWhenSneaking()) {
+            int opacity = displayContent.getCurrentFrame().textOpacity();
+            if (opacity < 0) {
+                opacity = 256 + opacity;
+            }
+            if (event.isSneaking()) {
+                opacity /= 4;
+            }
+            textDisplay.setTextOpacity((byte) opacity);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerTeleportHindered(EntityTeleportHinderedEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (event.getReason() != EntityTeleportHinderedEvent.Reason.IS_VEHICLE) return;

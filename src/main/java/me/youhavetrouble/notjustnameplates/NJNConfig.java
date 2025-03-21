@@ -83,6 +83,8 @@ public class NJNConfig {
 
         displayContent.setRefreshRate(displayContentSection.getInt("refresh-rate", 0));
         displayContent.setSeeThrough(displayContentSection.getBoolean("see-through", false));
+        displayContent.setSeeThroughWhenSneaking(displayContentSection.getBoolean("see-through-when-sneaking", true));
+        displayContent.setTranslucentWhenSneaking(displayContentSection.getBoolean("translucent-when-sneaking", true));
         displayContent.setInterpolationDelay(displayContentSection.getInt("interpolation-delay", displayContent.getRefreshRate()));
         displayContent.setInterpolationDuration(displayContentSection.getInt("interpolation-duration", displayContent.getRefreshRate()));
         displayContent.setViewRange(displayContentSection.getInt("view-range", Bukkit.spigot().getSpigotConfig().getInt("world-settings.default.entity-tracking-range.players", 48)));

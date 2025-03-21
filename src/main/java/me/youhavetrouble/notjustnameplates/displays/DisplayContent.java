@@ -13,6 +13,8 @@ public class DisplayContent {
     private int refreshRate, interpolationDuration, interpolationDelay, currentFrame, viewRange;
     private Display.Billboard billboard = Display.Billboard.HORIZONTAL;
     private boolean seeThrough = false;
+    private boolean seeThroughWhenSneaking = true;
+    private boolean translucentWhenSneaking = true;
 
     public DisplayContent() {
     }
@@ -42,6 +44,22 @@ public class DisplayContent {
 
     public boolean getSeeThrough() {
         return seeThrough;
+    }
+
+    public void setSeeThroughWhenSneaking(boolean seeThroughWhenSneaking) {
+        this.seeThroughWhenSneaking = seeThroughWhenSneaking;
+    }
+
+    public boolean getSeeThroughWhenSneaking() {
+        return seeThroughWhenSneaking;
+    }
+
+    public void setTranslucentWhenSneaking(boolean translucentWhenSneaking) {
+        this.translucentWhenSneaking = translucentWhenSneaking;
+    }
+
+    public boolean getTranslucentWhenSneaking() {
+        return translucentWhenSneaking;
     }
 
     public void setInterpolationDelay(int interpolationDelay) {

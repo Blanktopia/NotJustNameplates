@@ -175,7 +175,18 @@ public class Nameplate {
 
         textDisplay.setBillboard(this.content.getBillboard());
         textDisplay.setShadowed(content.getCurrentFrame().shadowed());
-        textDisplay.setTextOpacity(content.getCurrentFrame().textOpacity());
+
+        if (content.getTranslucentWhenSneaking() && player.isSneaking()) {
+            int opacity = content.getCurrentFrame().textOpacity();
+            if (opacity < 0) {
+                opacity = 256 + opacity;
+            }
+            opacity /= 4;
+            textDisplay.setTextOpacity((byte) opacity);
+        } else {
+            textDisplay.setTextOpacity(content.getCurrentFrame().textOpacity());
+        }
+
         textDisplay.setTransformation(new Transformation(
                 content.getCurrentFrame().offset(),
                 new AxisAngle4f(0, 0, 0, 0), // left rotation
